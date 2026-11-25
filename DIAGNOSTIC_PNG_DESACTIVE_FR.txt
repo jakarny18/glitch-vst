@@ -1,0 +1,9 @@
+YOUGLITCH SMP 1024 — TEST DE DIAGNOSTIC PNG (CORRECTIF CIBLÉ)
+
+Analyse du binaire précédent : le PDB associe l'adresse de plantage à une fonction de pnglib. Le réglage JUCE_USE_PNG=0 précédemment ajouté n'est pas le commutateur JUCE 8.0.6 qui contrôle le code PNG embarqué. Il a donc été retiré.
+
+Cette version applique au moment de la configuration CMake une modification contrôlée de JUCE 8.0.6 : le PNG est retiré de la liste des formats d'image automatiquement détectés par ImageFileFormat. JPEG et GIF restent enregistrés. Le patch échoue volontairement si le fichier JUCE attendu ou le bloc exact ne correspond pas.
+
+Le code du projet ne contient pas d'appel explicite au chargement d'images PNG. Les fonctions audio, samples, MIDI, effets et séquenceur ne sont pas modifiées.
+
+IMPORTANT : ce paquet est une source de diagnostic à compiler sur GitHub Actions Windows x64. Il n'est pas présenté comme déjà compilé ou validé sur Windows. Si le plantage persiste, récupérer un nouveau dump issu de CETTE compilation et le PDB correspondant.

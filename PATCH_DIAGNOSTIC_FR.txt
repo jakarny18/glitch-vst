@@ -1,0 +1,8 @@
+Patch appliqué à la configuration :
+- Retrait de PNGImageFormat de DefaultImageFormats dans JUCE 8.0.6.
+- JPEG et GIF restent dans la liste automatique.
+- Le patch est effectué après FetchContent_MakeAvailable(JUCE).
+- CMake vérifie le fichier et le bloc d'origine ; sinon il arrête la configuration.
+- JUCE_USE_PNG=0 retiré car ce n'est pas le bon commutateur JUCE 8.0.6.
+
+Ce test n'est pas une preuve de correction définitive : il sert à isoler le chemin de décodage PNG.
