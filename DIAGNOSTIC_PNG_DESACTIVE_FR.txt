@@ -1,0 +1,14 @@
+YOUGLITCH SMP 1024 — BUILD DE DIAGNOSTIC PNG
+
+But : isoler le plantage observé dans juce::pnglibNamespace::png_set_sCAL_fixed.
+
+Modification unique : JUCE_USE_PNG=0 dans CMakeLists.txt.
+Le code applicatif ne contient aucun appel explicite à ImageFileFormat, PNGImageFormat, ImageCache ou Drawable pour charger des images.
+
+Conséquence : le chargement des images PNG est désactivé dans cette compilation. Cela ne désactive ni l'audio, ni les samples audio, ni le MIDI, ni les effets, ni le séquenceur.
+
+Interprétation du test :
+- Si le Standalone démarre, cela indique que le chemin PNG de JUCE est impliqué, sans prouver à lui seul la cause racine.
+- Si le Standalone plante encore, il faudra analyser le nouveau dump et ne pas conclure que le PNG était la cause.
+
+Cette archive est une source de compilation de diagnostic. Elle n'est pas un exécutable compilé ou validé. Compiler sur GitHub Actions Windows x64.
